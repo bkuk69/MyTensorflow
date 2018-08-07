@@ -7,15 +7,19 @@ T, F = 1., -1.
 bias = 1.
 
 train_in= [
-    [T, T, bias],
-    [T, F, bias],
-    [F, T, bias],
-    [F, F, bias]
+    [T, T, T, bias],
+    [T, T, F, bias],
+    [T, F, T, bias],
+    [T, F, F, bias],
+    [F, T, T, bias],
+    [F, T, F, bias],
+    [F, F, T, bias],
+    [F, F, F, bias]
 ]
 
-train_out = [[T], [F], [F], [F]]
+train_out = [[T], [F], [F], [F],[F], [F], [F], [F]]
 
-w = tf.Variable(tf.random_normal([3,1]))
+w = tf.Variable(tf.random_normal([4,1]))
 
 def step(x):
     is_greater = tf.greater(x,0) #return 타입이 bool형 x가 0보다 크냐 아니냐 알아봄 

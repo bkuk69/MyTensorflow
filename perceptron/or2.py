@@ -13,7 +13,7 @@ train_in= [
     [F, F, bias]
 ]
 
-train_out = [[T], [F], [F], [F]]
+train_out = [[T], [T], [T], [F]]
 
 w = tf.Variable(tf.random_normal([3,1]))
 
