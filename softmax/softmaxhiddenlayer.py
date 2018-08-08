@@ -7,13 +7,21 @@ mnist = input_data.read_data_sets("data/MNIST", one_hot="True")
 sess = tf.Session()
 
 x = tf.placeholder(tf.float32, [None, 784]) #input neuron은 28*28이다.
-W = tf.Variable(tf.zeros([784, 10]))
-b = tf.Variable(tf.zeros([10]))
-y = tf.nn.softmax(tf.matmul(x,W) + b ) #추측값
+W1 = tf.Variable(tf.random_normal([784, 300]))
+b1 = tf.Variable(tf.zeros([300]))
+#y1 = tf.matmul(x, W1) + b1
+y1 = tf.nn.softmax(tf.matmul(x,W1) + b1 )
+
+#hidden Layer
+
+W2 = tf.Variable(tf.random_normal([300, 10]))
+b2 = tf.Variable(tf.zeros([10]))
+y = tf.nn.softmax(tf.matmul(y1,W2) + b2 )
+
 
 ans = tf.placeholder(tf.float32, [None, 10]) #정답
 loss = tf.reduce_mean(-tf.reduce_sum(ans * tf.log(y),1))
-opt = tf.train.GradientDescentOptimizer(0.2).minimize(loss)
+opt = tf.train.AdamOptimizer().minimize(loss)
 
 sess.run(tf.global_variables_initializer())
 
@@ -23,8 +31,8 @@ def test():
     print("\ny vector is ", answer)
     print("my guess is ", answer.argmax())#제일큰 숫자가 몇번째 있는지 나타냄
 
-train_tot = 1000
-batch_size = 100
+train_tot = 10000
+batch_size = 500
 
 test()
 for i in range(train_tot):

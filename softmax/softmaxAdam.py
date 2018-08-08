@@ -18,12 +18,12 @@ opt = tf.train.GradientDescentOptimizer(0.2).minimize(loss)
 sess.run(tf.global_variables_initializer())
 
 def test():
-    x_train = mnist.test.images[2:3, 0:784]
+    x_train = mnist.test.images[0:1, 0:784]
     answer = sess.run(y, feed_dict={x:x_train})
     print("\ny vector is ", answer)
     print("my guess is ", answer.argmax())#제일큰 숫자가 몇번째 있는지 나타냄
 
-train_tot = 1000
+train_tot = 10000
 batch_size = 100
 
 test()
@@ -39,7 +39,3 @@ accuracy = tf.reduce_mean(tf.cast(correct, tf.float32))
 images = mnist.test.images
 labels = mnist.test.labels
 print("\nmodel accuracy: ", sess.run(accuracy, feed_dict={x: images, ans:labels}))
-
-
-#print(sess.run(W[0:784, 0]))#첫번째 것의 가중치 W를 직어본다.
-
