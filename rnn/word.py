@@ -29,3 +29,5 @@ def make_batch(seq_data):
 #x, y = make_batch(seq_data)
 #print(x)
 #print(y)
+
+learning_rate = 0.01
